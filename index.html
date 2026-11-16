@@ -729,7 +729,7 @@
                                     <input type="text" data-field="know_env_convection" placeholder="Nhập môi trường..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 bg-slate-50/60">
                                 </div>
                                 <div class="bg-white p-3 rounded-xl border border-amber-200 space-y-1.5">
-                                    <label class="block text-xs font-extrabold text-amber-700]">• Bức xạ nhiệt: Có thể truyền qua môi trường nào? <span class="text-red-500">*</span></label>
+                                    <label class="block text-xs font-extrabold text-amber-700">• Bức xạ nhiệt: Có thể truyền qua môi trường nào? <span class="text-red-500">*</span></label>
                                     <input type="text" data-field="know_env_radiation" placeholder="Nhập môi trường..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 bg-slate-50/60">
                                 </div>
                             </div>
@@ -744,47 +744,46 @@
                 </div>
             </div>
 
-            <!-- KHU VỰC NỘP BÀI LÀM CHO GIÁO VIÊN & XUẤT PDF (TRỰC TIẾP SAU PHẦN A & B) -->
+            <!-- KHU VỰC NỘP BÀI CHO GIÁO VIÊN QUA GMAIL & XUẤT PDF -->
             <div id="submit-section" class="bg-white rounded-2xl border-2 border-emerald-600 shadow-lg p-5 space-y-4 no-print">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                    <div class="flex items-center gap-2.5">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                    <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
                             <i data-lucide="send" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <h3 class="font-extrabold text-sm sm:text-base text-slate-900">NỘP BÀI LÀM CHO GIÁO VIÊN & XUẤT PDF</h3>
-                            <p id="stage3-submit-hint" class="text-xs text-slate-600">Hoàn thành đầy đủ Phần A và Phần B để xuất phiếu PDF hoặc gửi trực tiếp về Gmail giáo viên.</p>
+                            <p id="stage3-submit-hint" class="text-xs text-slate-600">Hoàn thành đầy đủ Phần A và Phần B để gửi bài trực tiếp qua Gmail cho giáo viên hoặc xuất phiếu PDF.</p>
                         </div>
                     </div>
-                    <button onclick="exportWorksheetPDF()" class="btn-phet bg-slate-800 hover:bg-slate-900 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shrink-0">
-                        <i data-lucide="printer" class="w-4 h-4 text-amber-300"></i>
-                        <span>Xuất PDF / In phiếu</span>
-                    </button>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-extrabold text-slate-700 mb-1">Email (Gmail) của Giáo viên nhận bài: <span class="text-red-500">*</span></label>
-                        <input type="email" id="teacher-email" placeholder="giaovien.khtn8@gmail.com" class="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 bg-slate-50 font-medium">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-extrabold text-slate-700 mb-1">URL Web App Google Apps Script:</label>
-                        <input type="url" id="gas-endpoint-url" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 bg-slate-50 font-mono-num">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="openSummaryModal()" class="btn-phet bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                            <span>Xem trước bản tổng hợp bài làm</span>
+                        </button>
+                        <button onclick="exportWorksheetPDF()" class="btn-phet bg-slate-800 hover:bg-slate-900 text-white font-extrabold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5">
+                            <i data-lucide="printer" class="w-4 h-4 text-amber-300"></i>
+                            <span>Xuất PDF / In phiếu</span>
+                        </button>
                     </div>
                 </div>
 
-                <div id="submit-status-box" class="hidden rounded-xl px-4 py-3 text-xs font-bold"></div>
-
-                <div class="flex flex-wrap items-center justify-end gap-2.5">
-                    <button onclick="openSummaryModal()" class="btn-phet bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5">
-                        <i data-lucide="eye" class="w-4 h-4"></i>
-                        <span>Xem trước bản tổng hợp bài làm</span>
-                    </button>
-                    <button onclick="submitToTeacherGmail()" id="btn-send-gmail" class="btn-phet bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2">
-                        <i data-lucide="mail" class="w-4 h-4"></i>
-                        <span>Gửi bài làm qua Gmail cho Giáo viên</span>
-                    </button>
+                <!-- Khu vực nhập Gmail giáo viên và gửi bài trực tiếp -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end bg-emerald-50/50 p-4 rounded-xl border border-emerald-200">
+                    <div class="md:col-span-8">
+                        <label class="block text-xs font-extrabold text-slate-800 mb-1">Địa chỉ Gmail của giáo viên <span class="text-red-500">*</span></label>
+                        <input type="email" id="teacher-email-input" placeholder="Ví dụ: giaovien.khtn@gmail.com" class="w-full px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 bg-white font-semibold">
+                    </div>
+                    <div class="md:col-span-4 flex justify-end">
+                        <button onclick="submitToTeacherGmail()" class="btn-phet w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1.5">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            <span>Gửi bài qua Gmail</span>
+                        </button>
+                    </div>
                 </div>
+
+                <div id="submit-feedback" class="hidden text-xs font-bold px-3.5 py-2.5 rounded-xl"></div>
             </div>
         </section>
     </main>
@@ -2404,7 +2403,7 @@
         }
 
         // =========================================================================
-        // PHẦN 3: QUẢN LÝ PHIẾU HỌC TẬP, MỞ KHÓA 3 GIAI ĐOẠN & GỬI GMAIL / PDF
+        // PHẦN 3: QUẢN LÝ PHIẾU HỌC TẬP, MỞ KHÓA 3 GIAI ĐOẠN & XUẤT PDF
         // =========================================================================
         const STORAGE_KEY = 'khtn8_bai28_worksheet_v4';
 
@@ -2577,10 +2576,10 @@
             const submitHint = document.getElementById('stage3-submit-hint');
             if (submitHint) {
                 if (s3Ready) {
-                    submitHint.textContent = '✓ Đã hoàn thành đầy đủ Phần A và Phần B! Bạn có thể xuất phiếu PDF hoặc gửi bài ngay về Gmail giáo viên.';
+                    submitHint.textContent = '✓ Đã hoàn thành đầy đủ Phần A và Phần B! Bạn có thể gửi bài qua Gmail cho giáo viên hoặc xuất phiếu PDF.';
                     submitHint.className = 'text-xs font-bold text-emerald-700';
                 } else {
-                    submitHint.textContent = 'Hoàn thành đầy đủ Phần A và Phần B để xuất phiếu PDF hoặc gửi trực tiếp về Gmail giáo viên.';
+                    submitHint.textContent = 'Hoàn thành đầy đủ Phần A và Phần B để gửi bài trực tiếp qua Gmail cho giáo viên hoặc xuất phiếu PDF.';
                     submitHint.className = 'text-xs text-slate-600';
                 }
             }
@@ -2722,8 +2721,7 @@
                 groupMeta,
                 unlockState,
                 fieldsData,
-                teacherEmail: document.getElementById('teacher-email')?.value || '',
-                gasUrl: document.getElementById('gas-endpoint-url')?.value || ''
+                teacherEmail: document.getElementById('teacher-email-input')?.value || ''
             };
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -2742,6 +2740,9 @@
                 const saved = JSON.parse(raw);
                 if (saved.groupMeta) groupMeta = saved.groupMeta;
                 if (saved.unlockState) unlockState = { ...unlockState, ...saved.unlockState };
+                if (saved.teacherEmail && document.getElementById('teacher-email-input')) {
+                    document.getElementById('teacher-email-input').value = saved.teacherEmail;
+                }
                 if (saved.fieldsData) {
                     Object.entries(saved.fieldsData).forEach(([k, v]) => {
                         const radios = document.querySelectorAll(`input[type="radio"][data-field="${k}"]`);
@@ -2753,8 +2754,6 @@
                         }
                     });
                 }
-                if (saved.teacherEmail) document.getElementById('teacher-email').value = saved.teacherEmail;
-                if (saved.gasUrl) document.getElementById('gas-endpoint-url').value = saved.gasUrl;
 
                 document.getElementById('input-group-name').value = groupMeta.groupName;
                 document.getElementById('input-exec-date').value = groupMeta.execDate;
@@ -2782,8 +2781,8 @@
                 saveWorksheet();
             });
         });
-        document.getElementById('teacher-email')?.addEventListener('input', saveWorksheet);
-        document.getElementById('gas-endpoint-url')?.addEventListener('input', saveWorksheet);
+
+        document.getElementById('teacher-email-input')?.addEventListener('input', saveWorksheet);
 
         // Tổng hợp toàn bộ bài làm thành báo cáo chuẩn (bao gồm đầy đủ câu 1.2 mới và hoạt động tổng kết kiến thức)
         function buildFullReportText() {
@@ -2848,64 +2847,6 @@
             ].join('\n');
         }
 
-        // Gửi bài thật qua Google Apps Script Web App tới Gmail giáo viên
-        async function submitToTeacherGmail() {
-            const teacherEmail = document.getElementById('teacher-email').value.trim();
-            const gasUrl = document.getElementById('gas-endpoint-url').value.trim();
-            const statusBox = document.getElementById('submit-status-box');
-            const btn = document.getElementById('btn-send-gmail');
-
-            if (!checkListFilled(STAGE3_REQUIRED)) {
-                highlightMissingFields(STAGE3_REQUIRED, 'stage3-submit-hint', 'Vẫn còn câu hỏi ở Phần A hoặc Phần B chưa hoàn thành (đã đánh dấu viền đỏ). Hãy điền đủ trước khi gửi bài!');
-                return;
-            }
-
-            if (!teacherEmail || !teacherEmail.includes('@')) {
-                statusBox.className = 'rounded-xl px-4 py-3 text-xs font-bold bg-red-50 border border-red-200 text-red-700';
-                statusBox.textContent = 'Vui lòng nhập đúng địa chỉ Gmail của Giáo viên nhận bài!';
-                statusBox.classList.remove('hidden');
-                return;
-            }
-            if (!gasUrl || !gasUrl.startsWith('https://script.google.com/')) {
-                statusBox.className = 'rounded-xl px-4 py-3 text-xs font-bold bg-amber-50 border border-amber-300 text-amber-900';
-                statusBox.textContent = 'Vui lòng dán URL Web App Google Apps Script hợp lệ (bắt đầu bằng https://script.google.com/...) để hệ thống gửi email tự động về Gmail giáo viên.';
-                statusBox.classList.remove('hidden');
-                return;
-            }
-
-            const payload = {
-                teacherEmail,
-                groupName: groupMeta.groupName,
-                execDate: groupMeta.execDate,
-                members: groupMeta.members.map(m => m.trim()).filter(Boolean),
-                reportText: buildFullReportText()
-            };
-
-            btn.disabled = true;
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Đang gửi bài về Gmail giáo viên...</span>`;
-            lucide.createIcons();
-
-            try {
-                await fetch(gasUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-                statusBox.className = 'rounded-xl px-4 py-3 text-xs font-bold bg-emerald-50 border border-emerald-300 text-emerald-800';
-                statusBox.textContent = `✓ Đã gửi toàn bộ bài làm của ${groupMeta.groupName} tới Gmail (${teacherEmail}) thành công!`;
-                statusBox.classList.remove('hidden');
-            } catch (err) {
-                statusBox.className = 'rounded-xl px-4 py-3 text-xs font-bold bg-red-50 border border-red-200 text-red-700';
-                statusBox.textContent = 'Không thể kết nối tới máy chủ Google Apps Script. Hãy kiểm tra lại kết nối mạng hoặc đường dẫn Web App URL.';
-                statusBox.classList.remove('hidden');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = `<i data-lucide="mail" class="w-4 h-4"></i><span>Gửi bài làm qua Gmail cho Giáo viên</span>`;
-                lucide.createIcons();
-            }
-        }
-
         function exportWorksheetPDF() {
             const printMap = {
                 'print-o-tn1-a': 'o_tn1_a',
@@ -2923,6 +2864,36 @@
                 if (el) el.textContent = getFieldVal(field);
             });
             window.print();
+        }
+
+        function submitToTeacherGmail() {
+            const fb = document.getElementById('submit-feedback');
+            if (!checkListFilled(STAGE3_REQUIRED)) {
+                highlightMissingFields(STAGE3_REQUIRED, 'stage3-submit-hint', 'Vui lòng hoàn thành đầy đủ Phần A và Phần B trước khi gửi bài cho giáo viên!');
+                fb.textContent = 'Chưa thể gửi: Vẫn còn mục chưa hoàn thành ở Phần A hoặc Phần B.';
+                fb.className = 'text-xs font-bold px-3.5 py-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700';
+                fb.classList.remove('hidden');
+                return;
+            }
+
+            const email = document.getElementById('teacher-email-input').value.trim();
+            if (!email || !email.includes('@')) {
+                fb.textContent = 'Vui lòng nhập đúng địa chỉ Gmail của giáo viên trước khi gửi!';
+                fb.className = 'text-xs font-bold px-3.5 py-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700';
+                fb.classList.remove('hidden');
+                document.getElementById('teacher-email-input').focus();
+                return;
+            }
+
+            const subject = `[KHTN 8 - Bài 28] Phiếu học tập số - ${groupMeta.groupName}`;
+            const body = buildFullReportText();
+
+            const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(gmailComposeUrl, '_blank');
+
+            fb.innerHTML = `✓ Đã mở cửa sổ soạn thư Gmail gửi tới <strong>${email}</strong> với đầy đủ nội dung bài làm của <strong>${groupMeta.groupName}</strong>. Hãy nhấn nút <strong>Gửi (Send)</strong> trong Gmail để hoàn tất!`;
+            fb.className = 'text-xs font-bold px-3.5 py-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800';
+            fb.classList.remove('hidden');
         }
 
         function openSummaryModal() {
